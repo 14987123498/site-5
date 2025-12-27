@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профессиональная уборка дома | Чистота и комфорт</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #2a9d8f;
+            --secondary-color: #264653;
+            --accent-color: #e9c46a;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Шапка */
+        header {
+            background: linear-gradient(rgba(42, 157, 143, 0.9), rgba(38, 70, 83, 0.9)), url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .logo {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            animation: slideUp 1s ease-out 0.5s both;
+        }
+
+        .logo i {
+            color: var(--accent-color);
+            font-size: 2.2rem;
+        }
+
+        .header-content {
+            max-width: 800px;
+            margin-top: 3rem;
+        }
+
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            animation: slideUp 1s ease-out 0.7s both;
+        }
+
+        .header-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: slideUp 1s ease-out 0.9s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: slideUp 1s ease-out 1.1s both, pulse 2s infinite 3s;
+        }
+
+        .cta-button:hover {
+            background-color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Основной контент */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 4px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* О нас */
+        .about {
+            background-color: white;
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Услуги */
+        .services {
+            background-color: #f0f7f6;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+
+        .service-content {
+            padding: 1.5rem;
+        }
+
+        .service-content h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-content p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        /* Галерея */
+        .gallery {
+            background-color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 250px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* Преимущества */
+        .advantages {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .advantages .section-title h2 {
+            color: white;
+        }
+
+        .advantages .section-title h2::after {
+            background-color: var(--accent-color);
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .advantage-item {
+            text-align: center;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .advantage-item:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .advantage-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .advantage-item:nth-child(2) .advantage-icon {
+            animation-delay: 0.5s;
+        }
+
+        .advantage-item:nth-child(3) .advantage-icon {
+            animation-delay: 1s;
+        }
+
+        .advantage-item:nth-child(4) .advantage-icon {
+            animation-delay: 1.5s;
+        }
+
+        .advantage-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Контакты */
+        .contacts {
+            background-color: white;
+        }
+
+        .contacts-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-right: 1rem;
+            margin-top: 0.3rem;
+        }
+
+        .contact-details h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .contact-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Подвал */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            color: #aaa;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header-content p {
+                font-size: 1.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .about-content, .contacts-content {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content h1 {
+                font-size: 2rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .cta-button {
+                padding: 0.8rem 1.8rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header id="home">
+        <div class="logo">
+            <i class="fas fa-broom"></i>
+            <span>Сleaner homes</span>
+        </div>
+        
+        <div class="header-content">
+            <h1>Профессиональная уборка вашего дома</h1>
+            <p>Идеальная чистота без ваших усилий. Мы заботимся о каждом уголке вашего дома, используя экологичные средства и современное оборудование.</p>
+            <a href="#contacts" class="cta-button">Связаться с нами</a>
+        </div>
+    </header>
+
+    <!-- О нас -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>О нашей компании</h2>
+            </div>
+            
+            <div class="about-content animate-on-scroll">
+                <div class="about-text">
+                    <p>Мы - команда профессиональных уборщиков с более чем 10-летним опытом работы. Наша миссия - создавать чистоту и уют в вашем доме, чтобы вы могли наслаждаться свободным временем с близкими.</p>
+                    <p>Мы используем только безопасные и экологичные средства для уборки, которые не вредят здоровью вашей семьи и домашних питомцев. Наше современное оборудование позволяет эффективно удалять даже самые сложные загрязнения.</p>
+                    <p>Каждый наш сотрудник проходит тщательный отбор и обучение, поэтому мы гарантируем высокое качество услуг и внимательное отношение к вашим вещам.</p>
+                </div>
+                
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1583947581924-860bda6a26df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Профессиональная уборка">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Услуги -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши услуги</h2>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card animate-on-scroll">
+                    <div class="service-image">
+                        <img src="5.jpg" alt="Генеральная уборка">
+                    </div>
+                    <div class="service-content">
+                        <h3>Генеральная уборка</h3>
+                        <p>Тщательная уборка всех помещений с чисткой труднодоступных мест, мойкой окон, чисткой ковров и мебели.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card animate-on-scroll">
+                    <div class="service-image">
+                        <img src="1.avif" alt="Регулярная уборка">
+                    </div>
+                    <div class="service-content">
+                        <h3>Регулярная уборка</h3>
+                        <p>Поддержание чистоты в доме на постоянной основе. Вы можете выбрать периодичность: ежедневно, через день или еженедельно.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card animate-on-scroll">
+                    <div class="service-image">
+                        <img src="6.jpeg" alt="Уборка после ремонта">
+                    </div>
+                    <div class="service-content">
+                        <h3>Уборка после ремонта</h3>
+                        <p>Удаление строительной пыли, остатков материалов и приведение помещения в идеальное состояние после ремонтных работ.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Галерея -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наша работа</h2>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item animate-on-scroll">
+                    <img src="3.jpg" alt="Уборка кухни">
+                </div>
+                
+                <div class="gallery-item animate-on-scroll">
+                    <img src="2.avif" alt="Моем окна">
+                </div>
+                
+                <div class="gallery-item animate-on-scroll">
+                    <img src="7.jpg" alt="Уборка ванной">
+                </div>
+            
+            </div>
+        </div>
+    </section>
+
+    <!-- Преимущества -->
+    <section class="advantages" id="advantages">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши преимущества</h2>
+            </div>
+            
+            <div class="advantages-grid">
+                <div class="advantage-item animate-on-scroll">
+                    <div class="advantage-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Экологичные средства</h3>
+                    <p>Используем только безопасные для здоровья и окружающей среды чистящие средства</p>
+                </div>
+                
+                <div class="advantage-item animate-on-scroll">
+                    <div class="advantage-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>Проверенные сотрудники</h3>
+                    <p>Все наши уборщики проходят тщательный отбор и обучение</p>
+                </div>
+                
+                <div class="advantage-item animate-on-scroll">
+                    <div class="advantage-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Работаем в удобное время</h3>
+                    <p>Готовы приехать в любое удобное для вас время, включая выходные</p>
+                </div>
+                
+                <div class="advantage-item animate-on-scroll">
+                    <div class="advantage-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3>Гарантия качества</h3>
+                    <p>Если что-то не понравится, мы вернемся и бесплатно переделаем работу</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section class="contacts" id="contacts">
+        <div class="container">
+            <div class="section-title">
+                <h2>Контакты</h2>
+            </div>
+            
+            <div class="contacts-content">
+                <div class="contact-info animate-on-scroll">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Телефон</h3>
+                            <p>+7 (900) 123-45-67</p>
+                            <p>+7 (800) 765-43-21</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>cleanhome@example.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Время работы</h3>
+                            <p>Пн-Пт: 8:00 - 22:00</p>
+                            <p>Сб-Вс: 9:00 - 20:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Адрес</h3>
+                            <p>г. Омск, ул. Маяковского, д. 89/2</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-broom"></i> Сleaner homes
+            </div>
+            
+            <div class="footer-links">
+                <a href="#home">Главная</a>
+                <a href="#about">О нас</a>
+                <a href="#services">Услуги</a>
+                <a href="#gallery">Галерея</a>
+                <a href="#advantages">Преимущества</a>
+                <a href="#contacts">Контакты</a>
+            </div>
+            
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-vk"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 "Сleaner homes". Профессиональная уборка квартир и домов.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Анимация при скролле
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Плавный скролл для ссылок
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Анимация для кнопки CTA при наведении
+            const ctaButton = document.querySelector('.cta-button');
+            if (ctaButton) {
+                ctaButton.addEventListener('mouseenter', function() {
+                    this.style.animation = 'none';
+                    setTimeout(() => {
+                        this.style.animation = 'pulse 2s infinite';
+                    }, 10);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
